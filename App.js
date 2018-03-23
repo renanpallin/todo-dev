@@ -5,8 +5,12 @@ import TodoForm from './src/components/TodoForm';
 import { createStore, applyMiddleware } from 'redux';
 import reducer from './src/reducers';
 import { Provider } from 'react-redux';
+// import { composeWithDevTools } from 'remote-redux-devtools';
 
-const store = createStore(reducer, applyMiddleware());
+import devToolsEnhancer from 'remote-redux-devtools';
+
+const store = createStore(reducer, devToolsEnhancer());
+// const store = createStore(reducer, composeEnhancers(applyMiddleware()));
 
 export default class App extends React.Component {
     render() {

@@ -1,8 +1,16 @@
 export const ADD_TODO = 'ADD_TODO';
-export const addTodo = text => ({
-	type: ADD_TODO,
-	text,
-});
+// export const addTodo = text => ({
+// 	type: ADD_TODO,
+// 	text,
+// });
+
+export const addTodo = text => {
+	console.log('add todo sendo chamado', text);
+	return {
+		type: ADD_TODO,
+		text,
+	};
+};
 
 export const TOOGLE_TODO = 'TOOGLE_TODO';
 export const toogleTodo = todoId => ({
