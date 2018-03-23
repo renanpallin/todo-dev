@@ -1,14 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+
+import TodoForm from './src/components/TodoForm';
+import { createStore, applyMiddleware } from 'redux';
+import reducer from './src/reducers';
+import { Provider } from 'react-redux';
+
+const store = createStore(reducer, applyMiddleware());
 
 export default class App extends React.Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text>Open up App.js to start working on your app!</Text>
-                <Text>Changes you make will automatically reload.</Text>
-                <Text>Shake your phone to open the developer menu.</Text>
-            </View>
+            <Provider store={store}>
+                <View style={styles.container}>
+                    <TodoForm />
+                    {/*<TodoList />*/}
+                </View>
+            </Provider>
         );
     }
 }
