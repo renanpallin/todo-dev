@@ -1,14 +1,14 @@
 import { ADD_TODO, EDIT_TODO } from '../actions';
-// import uuid from 'uuid/v4';
+import uuid from 'uuid/v4';
 
-export default (state = [], action) => {
+export default (state = [{ id: 123, text: 'First', done: false}], action) => {
 	switch (action.type) {
 		case ADD_TODO:
 			console.log('reducer!')
 			return [
 				...state,
 				{
-					// id: uuid(),
+					id: uuid(),
 					text: action.text,
 					done: false,
 				},

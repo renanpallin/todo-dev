@@ -20,24 +20,44 @@ export default class TodoForm extends React.Component {
 			value: text,
 		});
 
-	saveTodo = () => this.props.addTodo(this.state.value);
+	saveTodo = () => {
+		this.props.addTodo(this.state.value);
+		this.setState({ value: '' });
+	};
 
 	render() {
 		return (
 			<View style={styles.formContainer}>
-				<Input
-					onChangeText={this.onChangeText}
-					value={this.state.value}
-				/>
-				<Button
-					onPress={this.saveTodo}
-					title="Salvar"
-				/>
+				<View style={styles.input}>
+					<Input
+						onChangeText={this.onChangeText}
+						value={this.state.value}
+					/>
+				</View>
+				<View style={styles.button}>
+					<Button
+						onPress={this.saveTodo}
+						title="Salvar"
+					/>
+				</View>
 			</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
-	formContainer: {},
+	formContainer: {
+		flexDirection: 'row',
+		flex: 1,
+		// height: 60
+	},
+	input: {
+		flex: 4,
+		height: 60
+	},
+	button: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 });
