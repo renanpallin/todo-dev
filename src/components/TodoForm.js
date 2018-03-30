@@ -2,21 +2,36 @@ import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { addTodo, updateTodo, setTodoText } from '../actions';
+import { addTodo, updateTodo } from '../actions';
 import Input from './Input';
 
-@connect(({ todo }) => ({ todo }), { addTodo, setTodoText, updateTodo })
+@connect(({ todo }) => ({ todo }), { addTodo, updateTodo })
 export default class TodoForm extends React.Component {
-	onChangeText = text => this.props.setTodoText(text);
+	state = {
+		text: this.props.todo.text || '',
+	};
+
+	componentWillReceiveProps(nextProps) {
+		console.log('cwr', nextProps);
+		if (nextProps.todo === this.props.todo)
+			return;
+		this.setState({
+			text: nextProps.todo.text || ''
+		})
+
+	}
+
+
+	onChangeText = text => this.setState({ text });
 	saveTodo = () => {
-		const { todo } = this.props
-		if (todo.id)
-			return this.props.updateTodo(todo)
-		return this.props.addTodo(todo.text);
+		const { todo } = this.props;
+		if (todo.id) this.props.updateTodo(todo);
+		else this.props.addTodo(this.state.text);
+		this.setState({ text: '' })
 	};
 
 	render() {
-		const { text } = this.props.todo;
+		const { text } = this.state;
 		return (
 			<View style={styles.formContainer}>
 				<View style={styles.input}>

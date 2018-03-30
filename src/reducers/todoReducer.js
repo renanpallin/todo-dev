@@ -16,11 +16,6 @@ export default (state = INITIAL_STATE, action) => {
 		case ADD_TODO:
 		case UPDATE_TODO:
 			return INITIAL_STATE;
-		case SET_TODO_TEXT:
-			return {
-				...state,
-				text: action.text,
-			};
 		default:
 			return state;
 	}
