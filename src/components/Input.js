@@ -3,7 +3,9 @@ import { StyleSheet, View, Text } from 'react-native';
 import TextInput from 'TextInput';
 
 const Input = ({ onChangeText, value }) => (
-	<TextInput onChangeText={onChangeText} value={value} style={styles.input} />
+	<TextInput onChangeText={(text) => {
+		onChangeText(text)
+	}} value={value} style={styles.input} />
 );
 
 const styles = StyleSheet.create({

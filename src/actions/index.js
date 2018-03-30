@@ -5,7 +5,7 @@ export const ADD_TODO = 'ADD_TODO';
 // });
 
 export const addTodo = text => {
-	console.log('add todo sendo chamado', text);
+	// console.log('add todo sendo chamado', text);
 	return {
 		type: ADD_TODO,
 		text,
@@ -18,8 +18,26 @@ export const toogleTodo = todoId => ({
 	todoId,
 });
 
-export const EDIT_TODO = 'EDIT_TODO';
-export const editTodo = todo => ({
-	type: EDIT_TODO,
+export const SET_EDITING_TODO = 'SET_EDITING_TODO';
+export const setEditingTodo = todo => ({
+	type: SET_EDITING_TODO,
 	todo,
+});
+
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const updateTodo = todo => ({
+	type: UPDATE_TODO,
+	todo,
+});
+
+export const SET_TODO = 'SET_TODO';
+export const setTodo = todo => ({
+	type: SET_TODO,
+	todo,
+});
+
+export const SET_TODO_TEXT = 'SET_TODO_TEXT';
+export const setTodoText = text => ({
+	type: SET_TODO_TEXT,
+	text,
 });

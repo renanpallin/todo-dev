@@ -2,15 +2,14 @@ import React from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
-import { addTodo } from '../actions';
+import { addTodo, setEditingTodo } from '../actions';
 
 import TodoListItem from './TodoListItem';
 
-@connect(state => ({ todos: state }))
+@connect(state => ({ todos: state.todoList }), { setEditingTodo })
 export default class TodoList extends React.Component {
 	saveTodo = () => {
 		this.props.addTodo(this.state.value);
-		this.setState({ valule: '' });
 	};
 
 	render() {
@@ -19,7 +18,11 @@ export default class TodoList extends React.Component {
 				<FlatList
 					data={this.props.todos}
 					renderItem={({ item, index }) => (
-						<TodoListItem todo={item} onClickRow={id => console.log(id)} />
+						<TodoListItem
+							todo={item}
+							onClickRow={id => console.log(id)}
+							onLongPress={todo => this.props.setEditingTodo(todo)}
+						/>
 					)}
 					keyExtractor={(item, index) => index}
 				/>
@@ -31,7 +34,7 @@ export default class TodoList extends React.Component {
 const styles = StyleSheet.create({
 	formContainer: {
 		flexDirection: 'row',
-		flex: 1
+		flex: 1,
 	},
 	input: {
 		flex: 4,
