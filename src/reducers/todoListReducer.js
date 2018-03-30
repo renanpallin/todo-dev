@@ -1,4 +1,4 @@
-import { ADD_TODO, EDIT_TODO, UPDATE_TODO } from '../actions';
+import { ADD_TODO, EDIT_TODO, UPDATE_TODO, TOOGLE_TODO } from '../actions';
 // import uuid from 'uuid/v4';
 import { combineReduers } from 'redux';
 
@@ -6,7 +6,6 @@ let nextTodoId = 1;
 export default (state = [{ id: 123, text: 'First', done: false }], action) => {
 	switch (action.type) {
 		case ADD_TODO:
-			console.log('reducer!', action);
 			return [
 				...state,
 				{
@@ -26,6 +25,13 @@ export default (state = [{ id: 123, text: 'First', done: false }], action) => {
 		case UPDATE_TODO:
 			return state.map(
 				todo => (todo.id === action.todo.id ? action.todo : todo)
+			);
+		case TOOGLE_TODO:
+			return state.map(
+				todo =>
+					todo.id === action.todoId
+						? { ...todo, done: !todo.done }
+						: todo
 			);
 		default:
 			return state;
